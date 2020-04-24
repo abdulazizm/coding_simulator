@@ -15,7 +15,6 @@ public class ApplicationWindow extends Application{
 	 private static TabPane workingAreaPane, projectStructurePane,outputPane;
 	 private static double horizontalDividerRatio = 0.22,verticalDividerRatio=0.75;
 
-
 	 @Override
 	 public void start(Stage primaryStage){
 		  horizontalParentPane = new SplitPane();
