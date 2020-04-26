@@ -43,7 +43,6 @@ public class FileMenu extends Menu{
 	 	 //Returns a TreeItem representation of the specified directory
 		  TreeItem<String> root = new TreeItem<String>(directory.getName());
 		  for(File f : directory.listFiles()) {
-			   System.out.println("Loading " + f.getName());
 			   if(f.isDirectory()) { //Then we call the function recursively
 					root.getChildren().add(getNodesForDirectory(f));
 			   } else {
