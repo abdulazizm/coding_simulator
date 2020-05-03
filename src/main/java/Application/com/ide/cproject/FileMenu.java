@@ -1,6 +1,5 @@
-package menu;
+package Application.com.ide.cproject;
 
-import Application.ApplicationWindow;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
@@ -8,7 +7,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
 
 import java.io.File;
 

@@ -1,17 +1,14 @@
-package Application;
+package Application.com.ide.cproject;
 
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 //Some Reference : https://stackoverflow.com/questions/17393691/how-to-resize-components-when-tab-pane-is-resized-with-mouse-drag
 
 
@@ -19,10 +16,11 @@ public class ApplicationWindow extends Application{
 	 private static Rectangle2D screenProperties;
 	 private static String APPLICATION_TITLE = "Application";
 	 private static SplitPane horizontalParentPane,verticalParentPane;
+	private static ScrollPane sp;
 	 private static VBox mainLayout;
 	 private static Scene scene;
 	 public  static BorderPane  projectStructurePane;
-	 private static TabPane  workingAreaPane,outputPane;
+	 private static TabPane workingAreaPane,outputPane;
 	 private static double horizontalDividerRatio = 0.22,verticalDividerRatio=0.75;
 	 public static Stage mainStage;
      public static ApplicationMenu menu;
@@ -31,6 +29,7 @@ public class ApplicationWindow extends Application{
 	 	  mainStage=primaryStage;
 	 	  mainLayout =new VBox();
 	 	  menu=new ApplicationMenu(this);
+
 		  screenProperties = Screen.getPrimary().getVisualBounds();
 
 		  horizontalParentPane = new SplitPane();
@@ -52,6 +51,15 @@ public class ApplicationWindow extends Application{
 
 		  outputPane = new TabPane();
 		  SplitPane.setResizableWithParent(outputPane, false);
+
+
+
+		 Tab tab = new Tab("Default.c");
+
+		 TextArea textArea = new TextArea();
+
+		 tab.setContent(textArea);
+		 workingAreaPane.getTabs().add(tab);
 
 		  horizontalParentPane.getItems().addAll(projectStructurePane, workingAreaPane);
 		  verticalParentPane.getItems().addAll(horizontalParentPane, outputPane);

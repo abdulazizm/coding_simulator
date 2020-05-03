@@ -1,12 +1,7 @@
-package Application;
+package Application.com.ide.cproject;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.*;
-import javafx.stage.DirectoryChooser;
-import menu.FileMenu;
-
-import java.io.File;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 
 public class ApplicationMenu extends MenuBar{
 	 static Menu FileMenu;
