@@ -1,10 +1,10 @@
-package Application.com.ide.cproject;
-
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
@@ -16,7 +16,7 @@ public class ApplicationWindow extends Application{
 	 private static Rectangle2D screenProperties;
 	 private static String APPLICATION_TITLE = "Application";
 	 private static SplitPane horizontalParentPane,verticalParentPane;
-	private static ScrollPane sp;
+	 private static ScrollPane sp;
 	 private static VBox mainLayout;
 	 private static Scene scene;
 	 public  static BorderPane  projectStructurePane;
@@ -24,7 +24,9 @@ public class ApplicationWindow extends Application{
 	 private static double horizontalDividerRatio = 0.22,verticalDividerRatio=0.75;
 	 public static Stage mainStage;
      public static ApplicationMenu menu;
-	 @Override
+     public static WorkSpaceEditor editor;
+
+	@Override
 	 public void start(Stage primaryStage){
 	 	  mainStage=primaryStage;
 	 	  mainLayout =new VBox();
@@ -49,17 +51,17 @@ public class ApplicationWindow extends Application{
 		  workingAreaPane = new TabPane();
 		  SplitPane.setResizableWithParent(workingAreaPane, false);
 
+		  //initialize code workarea with 1 default tab
+		  editor = new WorkSpaceEditor(workingAreaPane);
+		  //below is the snippet to add files to tab - use this to populate project files
+//		  try {
+//			editor.openNewTab("aziz","/home/operator1/personal/1.c",false);
+//		  } catch (IOException e) {
+//				e.printStackTrace();
+//		  }
+
 		  outputPane = new TabPane();
 		  SplitPane.setResizableWithParent(outputPane, false);
-
-
-
-		 Tab tab = new Tab("Default.c");
-
-		 TextArea textArea = new TextArea();
-
-		 tab.setContent(textArea);
-		 workingAreaPane.getTabs().add(tab);
 
 		  horizontalParentPane.getItems().addAll(projectStructurePane, workingAreaPane);
 		  verticalParentPane.getItems().addAll(horizontalParentPane, outputPane);

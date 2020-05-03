@@ -1,5 +1,3 @@
-package Application.com.ide.cproject;
-
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 

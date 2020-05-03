@@ -12,4 +12,13 @@ javafx {
     modules = [ 'javafx.controls' ]
 }
 
-mainClassName = 'Application.com.ide.cproject.ApplicationWindow'
+repositories {
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+}
+dependencies {
+    compile group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.10.5'
+}
+
+mainClassName = 'ApplicationWindow'
