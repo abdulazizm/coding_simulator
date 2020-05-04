@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Random;
 
+import static javafx.scene.control.ButtonType.*;
+
 public class FileAndTab {
     public Tab tab;
     public File file;
@@ -32,13 +34,12 @@ public class FileAndTab {
         tab.setOnCloseRequest(new EventHandler<javafx.event.Event>() {
             @Override
             public void handle(Event t) {
-                Alert areYouSureAlert = new Alert(Alert.AlertType.CONFIRMATION, "Project Modified? Save?", ButtonType.YES, ButtonType.NO);
+                Alert areYouSureAlert = new Alert(Alert.AlertType.CONFIRMATION, "File Modified? Save?", YES, NO,CANCEL);
                 Optional<ButtonType> result = areYouSureAlert.showAndWait();
-                if (result.isEmpty() || result.get() != ButtonType.YES) {
-                    t.consume();
-                } else {
-                    result.get();
+                if (result.get() == YES ) {
                     save();
+                } else if (result.get() == CANCEL){
+                    t.consume();
                 }
             }
         });
