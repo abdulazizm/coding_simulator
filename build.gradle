@@ -5,20 +5,14 @@ plugins {
 
 repositories {
     mavenCentral()
-}
-
-javafx {
-    version = "12"
-    modules = [ 'javafx.controls' ]
-}
-
-repositories {
     maven {
         url 'https://oss.sonatype.org/content/repositories/snapshots/'
     }
 }
 dependencies {
     compile group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.10.5'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.8'
 }
 
 mainClassName = 'ApplicationWindow'
+
