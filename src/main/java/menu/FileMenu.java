@@ -1,9 +1,10 @@
+package menu;
+
+import context.ContextmenuFactory;
+import core.ApplicationWindow;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
 
 import java.io.File;
@@ -25,24 +26,29 @@ public class FileMenu extends Menu{
 				   dc.setInitialDirectory(new File(System.getProperty("user.home")));
 				   File choice = dc.showDialog(applicationWindow.mainStage);
                    if(choice!=null){
-                   	   TreeView<String> mainDirectoryView=new TreeView<>();
+                   	   TreeView<Label> mainDirectoryView=new TreeView<>();
                        mainDirectoryView.setRoot(getNodesForDirectory(choice));
                        applicationWindow.projectStructurePane.setCenter(mainDirectoryView);
 				   }
 			  }
 		 });
-		  getItems().add(newProject);
+
+		 getItems().add(newProject);
 	 }
 
 
-	 public TreeItem<String> getNodesForDirectory(File directory) {
+	 public  TreeItem<Label> getNodesForDirectory(File directory) {
 	 	 //Returns a TreeItem representation of the specified directory
-		  TreeItem<String> root = new TreeItem<String>(directory.getName());
+		  Label label=new Label(directory.getName());
+		  TreeItem<Label> root = new TreeItem<Label>(label);
+		  ContextmenuFactory.setContextMenuForDirectory(label,directory.getAbsolutePath());
 		  for(File f : directory.listFiles()) {
 			   if(f.isDirectory()) { //Then we call the function recursively
 					root.getChildren().add(getNodesForDirectory(f));
 			   } else {
-					root.getChildren().add(new TreeItem<String>(f.getName()));
+					label=new Label(f.getName());
+					root.getChildren().add(new TreeItem<Label>(label));
+					ContextmenuFactory.setContextMenuForFile(label,f.getAbsolutePath());
 			   }
 		  }
 		  return root;

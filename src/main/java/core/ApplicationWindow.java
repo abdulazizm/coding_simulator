@@ -1,3 +1,6 @@
+package core;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.geometry.Rectangle2D;
@@ -9,8 +12,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-//Some Reference : https://stackoverflow.com/questions/17393691/how-to-resize-components-when-tab-pane-is-resized-with-mouse-drag
-
+import language.Language;
+import menu.ApplicationMenu;
 
 public class ApplicationWindow extends Application{
 	 private static Rectangle2D screenProperties;
@@ -51,14 +54,7 @@ public class ApplicationWindow extends Application{
 		  workingAreaPane = new TabPane();
 		  SplitPane.setResizableWithParent(workingAreaPane, false);
 
-		  //initialize code workarea with 1 default tab
 		  editor = new WorkSpaceEditor(workingAreaPane);
-		  //below is the snippet to add files to tab - use this to populate project files
-//		  try {
-//			editor.openNewTab("aziz","/home/operator1/personal/1.c",false);
-//		  } catch (IOException e) {
-//				e.printStackTrace();
-//		  }
 
 		  outputPane = new TabPane();
 		  SplitPane.setResizableWithParent(outputPane, false);
@@ -79,7 +75,6 @@ public class ApplicationWindow extends Application{
 		  primaryStage.setMaximized(true);
 		  primaryStage.show();
 	 }
-
 
 	 public static void main(String[] args){
 		  launch(args);
