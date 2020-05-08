@@ -6,6 +6,7 @@ import javafx.concurrent.Task;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import language.Language;
 import menu.FileTab;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
@@ -25,21 +26,12 @@ import java.util.regex.Pattern;
 
 public class WorkSpaceEditor {
     private static TabPane workingAreaPane;
+    private static String[] KEYWORDS;
+    static{
+        Language.importLanguageSpecs();
+        KEYWORDS = Language.keywords;
+    }
 
-    private static final String[] KEYWORDS = new String[]{
-            "abstract", "assert", "boolean", "break", "byte",
-            "case", "catch", "char", "class", "const",
-            "continue", "default", "do", "double", "else",
-            "enum", "extends", "final", "finally", "float",
-            "for", "goto", "if", "implements", "import",
-            "instanceof", "int", "interface", "long", "native",
-            "new", "package", "private", "protected", "public",
-            "return", "short", "static", "strictfp", "super",
-            "switch", "synchronized", "this", "throw", "throws",
-            "transient", "try", "void", "volatile", "while",
-
-            "auto","signed","unsigned","extern","register","sizeof","struct","typedef","union"
-    };
 
     private static final String KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
     private static final String PAREN_PATTERN = "\\(|\\)";
@@ -66,7 +58,6 @@ public class WorkSpaceEditor {
 
     public WorkSpaceEditor(TabPane l_workingAreaPane){
         workingAreaPane = l_workingAreaPane;
-        openNewTab(new FileTab(new File("/Users/amuthanmannan/Documents/ide/coding_simulator/HelloWorld124.c")),true);
         workingAreaPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
             @Override
             public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
@@ -79,19 +70,7 @@ public class WorkSpaceEditor {
         if(!fileTab.isAlreadyOpened()){
             CodeArea area = getCodeArea();
             if (intializeDefaultText){
-                area.appendText("###########################################################\n" +
-                        "### Filename:\n" +
-                        "### Author:\n" +
-                        "### Description:\n" +
-                        "### Last Release Notes:\n" +
-                        "###########################################################\n\n\n\n" + "#include <stdio.h>\n" +
-                        "\n" +
-                        "int main()\n" +
-                        "{\n" +
-                        "    printf(\"Hello World\");\n" +
-                        "\n" +
-                        "    return 0;\n" +
-                        "}");
+                area.appendText(Language.baseCodeString);
             } else{
                 String filePath = fileTab.getFilePath();
                 if (!filePath.isEmpty()){

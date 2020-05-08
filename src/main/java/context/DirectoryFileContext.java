@@ -1,6 +1,7 @@
 package context;
 
 import java.io.File;
+import java.nio.file.Files;
 
 public class DirectoryFileContext extends FileContext{
 

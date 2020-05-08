@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import language.Language;
 import menu.ApplicationMenu;
 
+import java.io.IOException;
+
 public class ApplicationWindow extends Application{
 	 private static Rectangle2D screenProperties;
 	 private static String APPLICATION_TITLE = "Application";
@@ -31,7 +33,7 @@ public class ApplicationWindow extends Application{
 
 	@Override
 	 public void start(Stage primaryStage){
-	 	  mainStage=primaryStage;
+		  mainStage=primaryStage;
 	 	  mainLayout =new VBox();
 	 	  menu=new ApplicationMenu(this);
 

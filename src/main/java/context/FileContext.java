@@ -4,6 +4,7 @@ import core.WorkSpaceEditor;
 import menu.FileTab;
 
 import java.io.File;
+import java.nio.file.Files;
 
 public class FileContext{
 	 File file;
