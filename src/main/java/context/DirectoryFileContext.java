@@ -1,7 +1,17 @@
 package context;
 
+
+import FileUtills.FileOps;
+import menu.FileMenu;
+import org.apache.commons.io.FileUtils;
+
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.File;
-import java.nio.file.Files;
+import java.io.IOException;
+import java.util.List;
 
 public class DirectoryFileContext extends FileContext{
 
@@ -14,13 +24,22 @@ public class DirectoryFileContext extends FileContext{
 	 }
 
 	 void paste(){
-		  System.out.println("pasted in directory");
+		  try {
+			   Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+			   Object data=clipboard.getData(DataFlavor.javaFileListFlavor);
+			   List<File> files=(List<File>) data;
+			   for(File e:files){
+					FileOps.copyTo(e,file);
+			   }
+			   FileMenu.setNodesForDirectory(FileMenu.directory);
+
+		  }
+		  catch (UnsupportedFlavorException| ClassCastException | IOException ex) {
+		  	 		System.out.println("file exception  .."+ex);
+		  }
+
 	 }
 
-	 @Override
-	 void copy(){
-		  System.out.println("Copied from directory");
-	 }
 
 	 @Override
 	 void cut(){

@@ -12,7 +12,8 @@ import java.io.File;
 public class FileMenu extends Menu{
 	 static String FILE_MENU="File";
 	 static MenuItem newProject;
-	 ApplicationWindow applicationWindow;
+	 public static File directory;
+	 static ApplicationWindow applicationWindow;
 
 	 public FileMenu(ApplicationWindow applicationWindow){
 	 	 super(FILE_MENU);
@@ -26,9 +27,8 @@ public class FileMenu extends Menu{
 				   dc.setInitialDirectory(new File(System.getProperty("user.home")));
 				   File choice = dc.showDialog(applicationWindow.mainStage);
                    if(choice!=null){
-                   	   TreeView<Label> mainDirectoryView=new TreeView<>();
-                       mainDirectoryView.setRoot(getNodesForDirectory(choice));
-                       applicationWindow.projectStructurePane.setCenter(mainDirectoryView);
+                   	   directory=choice;
+                       setNodesForDirectory(directory);
 				   }
 			  }
 		 });
@@ -36,14 +36,19 @@ public class FileMenu extends Menu{
 		 getItems().add(newProject);
 	 }
 
+	 public static void setNodesForDirectory(File directory){
+		  TreeView<Label> mainDirectoryView=new TreeView<>();
+		  mainDirectoryView.setRoot(getNodesForDirectory(directory));
+		  applicationWindow.projectStructurePane.setCenter(mainDirectoryView);
+	 }
 
-	 public  TreeItem<Label> getNodesForDirectory(File directory) {
-	 	 //Returns a TreeItem representation of the specified directory
+
+	 public  static TreeItem<Label> getNodesForDirectory(File directory) {
 		  Label label=new Label(directory.getName());
 		  TreeItem<Label> root = new TreeItem<Label>(label);
 		  ContextmenuFactory.setContextMenuForDirectory(label,directory.getAbsolutePath());
 		  for(File f : directory.listFiles()) {
-			   if(f.isDirectory()) { //Then we call the function recursively
+			   if(f.isDirectory()) {
 					root.getChildren().add(getNodesForDirectory(f));
 			   } else {
 					label=new Label(f.getName());

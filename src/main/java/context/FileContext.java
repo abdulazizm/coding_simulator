@@ -1,10 +1,14 @@
 package context;
 
 import core.WorkSpaceEditor;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import menu.FileTab;
 
+import java.awt.*;
 import java.io.File;
-import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileContext{
 	 File file;
@@ -18,7 +22,10 @@ public class FileContext{
 			  WorkSpaceEditor.openNewTab(fileAndTab, false);
 	 }
 	 void copy(){
-		  System.out.println("copied  file");
+		  List<File> files=new ArrayList<>();
+		  files.add(file);
+		  WorkSpaceEditor.clipboardContent.putFiles(files);
+		  WorkSpaceEditor.clipboard.setContent(WorkSpaceEditor.clipboardContent);
 	 }
 	 void cut(){
 		  System.out.println("Cutted  from file");
@@ -29,4 +36,5 @@ public class FileContext{
 	 void copyPath(){
 		  System.out.println("Copied path of file");
 	 }
+
 }

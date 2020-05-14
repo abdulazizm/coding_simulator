@@ -6,6 +6,8 @@ import javafx.concurrent.Task;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import language.Language;
 import menu.FileTab;
 import org.fxmisc.richtext.CodeArea;
@@ -27,9 +29,13 @@ import java.util.regex.Pattern;
 public class WorkSpaceEditor {
     private static TabPane workingAreaPane;
     private static String[] KEYWORDS;
+    public  static Clipboard clipboard;
+    public  static ClipboardContent clipboardContent;
     static{
         Language.importLanguageSpecs();
         KEYWORDS = Language.keywords;
+        clipboard= Clipboard.getSystemClipboard();
+        clipboardContent = new ClipboardContent();
     }
 
 
@@ -85,8 +91,7 @@ public class WorkSpaceEditor {
             }
             area.setParagraphGraphicFactory(LineNumberFactory.get(area));
             fileTab.openTab(area);
-        }
-
+         }
 
         if(workingAreaPane.getTabs().size() != 0) {
             workingAreaPane.getTabs().add((workingAreaPane.getTabs().size() - 1) ,fileTab.getTab());
@@ -98,7 +103,6 @@ public class WorkSpaceEditor {
         }
 
         SplitPane.setResizableWithParent(workingAreaPane, false);
-
         return true;
     }
 

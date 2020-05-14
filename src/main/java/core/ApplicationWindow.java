@@ -70,7 +70,6 @@ public class ApplicationWindow extends Application{
 		  verticalParentPane.setMinHeight(screenProperties.getHeight());
 		  horizontalParentPane.setMinWidth(screenProperties.getWidth());
 
-
 		  scene = new Scene(mainLayout);
 		  primaryStage.setScene(scene);
 		  primaryStage.setTitle(APPLICATION_TITLE);
