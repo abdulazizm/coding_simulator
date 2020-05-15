@@ -29,13 +29,9 @@ import java.util.regex.Pattern;
 public class WorkSpaceEditor {
     private static TabPane workingAreaPane;
     private static String[] KEYWORDS;
-    public  static Clipboard clipboard;
-    public  static ClipboardContent clipboardContent;
     static{
         Language.importLanguageSpecs();
         KEYWORDS = Language.keywords;
-        clipboard= Clipboard.getSystemClipboard();
-        clipboardContent = new ClipboardContent();
     }
 
 

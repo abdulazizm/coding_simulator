@@ -1,11 +1,10 @@
 package context;
 
+import Utills.ClipBoard;
 import core.WorkSpaceEditor;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
+import menu.FileMenu;
 import menu.FileTab;
 
-import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +23,9 @@ public class FileContext{
 	 void copy(){
 		  List<File> files=new ArrayList<>();
 		  files.add(file);
-		  WorkSpaceEditor.clipboardContent.putFiles(files);
-		  WorkSpaceEditor.clipboard.setContent(WorkSpaceEditor.clipboardContent);
+		  ClipBoard.copyToClipBoard(files);
 	 }
 	 void cut(){
-		  System.out.println("Cutted  from file");
 	 }
 	 void rename(){
 		  System.out.println("renaming file");
